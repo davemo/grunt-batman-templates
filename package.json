@@ -1,6 +1,6 @@
 {
   "name": "grunt-batman-templates",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Generates and stores BatmanJS templates in the Batman HTMLStore",
   "author": "David Mosher <davidmosher@gmail.com>",
   "main": "Gruntfile.js",
