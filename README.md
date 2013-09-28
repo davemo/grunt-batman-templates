@@ -22,18 +22,20 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-batman-templates');
 ```
 
-The "batman" task
+The "batman_templates" task
 ---------------------------
 
 ### Overview
-In your project's Gruntfile, add a section named `batman` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `batman_templates` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  batman: {
-    templates: {
+  batman_templates: {
+    options: {
       templateFolder: 'app/html' // optional, defaults to 'app/html'
-      files: 'app/html/**/*.html'
+    },
+    files: {
+      src: 'app/html/**/*.html'
       dest: 'batman-view-precache.js'
     }
   }
