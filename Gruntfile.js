@@ -16,10 +16,29 @@ module.exports = function(grunt) {
     },
 
     // configuration targets for system under test
-    batman: {
-      templates: {
-        files: 'test/sample_batman_application/app/html/**/*.html',
-        dest:  'tmp/actual_output_template_precache.js'
+    batman_templates: {
+
+      default_options_files_object_format: {
+        files: {
+          'tmp/default_options_files_object_format.js': 'test/sample_batman_application/app/html/**/*.html'
+        },
+      },
+
+      default_options_files_compact_format: {
+        src: 'test/sample_batman_application/app/html/**/*.html',
+        dest:  'tmp/default_options_files_compact_format.js'
+      },
+
+      using_template_folder_and_multiple_extensions_and_files_array_format: {
+        options: {
+          templateFolder: 'test/sample_batman_application_nested_in_rails/app/assets/batman/html'
+        },
+        files: [
+          {
+            src: 'test/sample_batman_application_nested_in_rails/app/assets/batman/html/**/*.js.htm',
+            dest: 'tmp/using_template_folder_and_multiple_extensions_and_files_array_format.js'
+          }
+        ]
       }
     },
 

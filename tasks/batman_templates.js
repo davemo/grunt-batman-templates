@@ -12,12 +12,10 @@ module.exports = function(grunt) {
   var _ = grunt.util._;
   var taskDescription = "precompiles batman templates and generates `Batman.View.store.set` for each template";
 
-  var DEFAULT_TEMPLATE_FOLDER = "app/html";
-
   var computesBatmanTemplateStorageKey = function(templateFolder, filePath) {
-    var numberOfTemplateFolderSegments = templateFolder.split("/").length;
-    var pathWithoutSuffix = _.str.rtrim(filePath, ".html")
-    var pathWithoutFolder = pathWithoutSuffix.split("/" + templateFolder + "/")[1];
+    var suffixStrippingRegex = /([^.]+)\..+$/;
+    var pathWithoutSuffix = filePath.match(suffixStrippingRegex)[1];
+    var pathWithoutFolder = pathWithoutSuffix.split(templateFolder + "/")[1];
     return pathWithoutFolder;
   };
 
@@ -25,27 +23,39 @@ module.exports = function(grunt) {
     return content.replace(/"/g, "\\\"").split("\n").join("\\n");
   };
 
-  grunt.registerTask("batman_templates", taskDescription, function(target) {
-    this.requiresConfig("batman.templates.files");
-    this.requiresConfig("batman.templates.dest");
+  grunt.registerMultiTask("batman_templates", taskDescription, function() {
+    var DEFAULT_TEMPLATE_FOLDER = "app/html";
+    var options = this.options({ templateFolder: DEFAULT_TEMPLATE_FOLDER });
 
-    var config          = grunt.config.get("batman.templates");
-    var templateFolder  = config.templateFolder || DEFAULT_TEMPLATE_FOLDER;
-    var templateFiles   = config.files;
-    var destinationFile = config.dest;
-    var output          = [];
+    // files src/dest pairs
+    _(this.files).each(function(f) {
+      var output = [];
 
-    _(grunt.file.expand(templateFiles)).each(function(filePath) {
-      var storageKey      = computesBatmanTemplateStorageKey(templateFolder, filePath);
-      var content         = grunt.file.read(filePath);
-      var precacheCommand =
-        "Batman.View.store.set('" +
-          storageKey + "', '" + prepareContent(content) +
-        "');";
+      // Warn on and remove invalid source files (if nonull was set).
+      var filepaths = f.src.filter(function(filepath) {
+        if (!grunt.file.exists(filepath)) {
+          grunt.log.warn('Source file "' + filepath + '" not found.');
+          return false;
+        } else {
+          return true;
+        }
+      });
 
-      output.push(precacheCommand);
+      _(filepaths).each(function(filePath) {
+        var storageKey      = computesBatmanTemplateStorageKey(options.templateFolder, filePath);
+        var content         = grunt.file.read(filePath);
+        var precacheCommand =
+          "Batman.View.store.set('" +
+            storageKey + "', '" + prepareContent(content) +
+          "');";
+
+        output.push(precacheCommand);
+      });
+
+      grunt.file.write(f.dest, output.join("\n") + "\n");
+
+      grunt.log.writeln('File "' + f.dest + '" created.');
     });
 
-    grunt.file.write(destinationFile, output.join("\n") + "\n");
   });
 };
