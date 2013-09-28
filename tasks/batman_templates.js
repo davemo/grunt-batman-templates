@@ -15,7 +15,7 @@ module.exports = function(grunt) {
   var computesBatmanTemplateStorageKey = function(templateFolder, filePath) {
     var suffixStrippingRegex = /([^.]+)\..+$/;
     var pathWithoutSuffix = filePath.match(suffixStrippingRegex)[1];
-    var pathWithoutFolder = pathWithoutSuffix.split(templateFolder + "/")[1];
+    var pathWithoutFolder = pathWithoutSuffix.split(templateFolder)[1];
     return pathWithoutFolder;
   };
 
