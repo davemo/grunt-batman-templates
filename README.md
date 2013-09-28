@@ -1,6 +1,8 @@
 grunt-batman-templates
 ======================
 
+[![Build Status](https://travis-ci.org/davemo/grunt-batman-templates.png?branch=master)](https://travis-ci.org/davemo/grunt-batman-templates)
+
 > Generates precache commands for Batman templates to pre-populate `Batman.View.store`
 
 Getting Started
