@@ -41,7 +41,6 @@ grunt.initConfig({
 Sample Output
 ---------------------------
 
-### Sample output from Unit Tests
 The following shows what the resulting `batman-view-precache.js` file looks like, based on the unit tests:
 
 ```js
@@ -49,6 +48,14 @@ Batman.View.store.set('posts/index', '<h1>Welcome to the Posts Page</h1>\n<ul cl
 Batman.View.store.set('posts/show', '<h1>Post: <span data-bind=\"post.title\"></span></h1>\n<span class=\"created-at\" data-bind=\"post.created_at\"></span>\n<div data-bind=\"post.content\"></div>\n');
 Batman.View.store.set('posts/subfolder/subtemplate', '<h1>This is a special template</h1>\n<div>Verifies that subfolder path lookups in the task work</div>\n');
 Batman.View.store.set('products/index', '<h1>Welcome to the Posts Page</h1>\n<ul class=\"products\">\n  <li class=\"product\" data-foreach-product=\"products\">\n    <span class=\"name\" data-bind=\"product.name\"></span>\n    <span class=\"price\" data-bind=\"product.price\"></span>\n  </li>\n</ul>\n');
+```
+
+You would include this JavaScript file _after_ your Batman application code ie:
+
+```html
+<script src="/path/to/batman.js"></script>
+<script src="/path/to/my-batman-app.js"></script>
+<script src="/path/to/batman-view-precache.js"></script>
 ```
 
 Contributing
