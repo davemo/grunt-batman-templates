@@ -14,7 +14,7 @@ If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out th
 npm install grunt-batman-templates --save-dev
 ```
 
-One the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
 grunt.loadNpmTasks('grunt-batman-templates');
@@ -35,7 +35,20 @@ grunt.initConfig({
       dest: 'batman-view-precache.js'
     }
   }
-})
+});
+```
+
+Sample Output
+---------------------------
+
+### Sample output from Unit Tests
+The following shows what the resulting `batman-view-precache.js` file looks like, based on the unit tests:
+
+```js
+Batman.View.store.set('posts/index', '<h1>Welcome to the Posts Page</h1>\n<ul class=\"posts\">\n  <li class=\"post\" data-foreach-post=\"posts\">\n    <span class=\"title\" data-bind=\"post.title\"></span>\n    <span class=\"created-at\" data-bind=\"post.created_at\"></span>\n  </li>\n</ul>\n');
+Batman.View.store.set('posts/show', '<h1>Post: <span data-bind=\"post.title\"></span></h1>\n<span class=\"created-at\" data-bind=\"post.created_at\"></span>\n<div data-bind=\"post.content\"></div>\n');
+Batman.View.store.set('posts/subfolder/subtemplate', '<h1>This is a special template</h1>\n<div>Verifies that subfolder path lookups in the task work</div>\n');
+Batman.View.store.set('products/index', '<h1>Welcome to the Posts Page</h1>\n<ul class=\"products\">\n  <li class=\"product\" data-foreach-product=\"products\">\n    <span class=\"name\" data-bind=\"product.name\"></span>\n    <span class=\"price\" data-bind=\"product.price\"></span>\n  </li>\n</ul>\n');
 ```
 
 Contributing
