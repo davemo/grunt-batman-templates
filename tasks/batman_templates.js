@@ -20,7 +20,7 @@ module.exports = function(grunt) {
   };
 
   var prepareContent = function(content) {
-    return content.replace(/"/g, "\\\"").split("\n").join("\\n");
+    return content.replace(/"/g, "\\\"").replace(/'/g, "\\\'").split("\n").join("\\n");
   };
 
   grunt.registerMultiTask("batman_templates", taskDescription, function() {
