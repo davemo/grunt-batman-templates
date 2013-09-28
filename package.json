@@ -1,0 +1,40 @@
+{
+  "name": "grunt-batman-templates",
+  "version": "0.0.0",
+  "description": "Generates and stores BatmanJS templates in the Batman HTMLStore",
+  "author": "David Mosher <davidmosher@gmail.com>",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:davemo/grunt-batman-templates.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davemo/grunt-batman-templates/issues"
+  },
+  "licenses": {
+    "type": "MIT",
+    "url": "http://mit-license.org"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-nodeunit": "~0.2.1",
+    "grunt-contrib-copy": "~0.4.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "keywords" : [
+    "gruntplugin",
+    "batman",
+    "template",
+    "templates",
+    "precompile",
+  ]
+}
