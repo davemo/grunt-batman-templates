@@ -24,12 +24,12 @@
     "grunt-contrib-nodeunit": "~0.2.1"
   },
   "peerDependencies": {
-    "grunt": "~0.4.1"
+    "grunt": ">=0.4.0"
   },
   "engines": {
     "node": ">= 0.8.0"
   },
-  "keywords" : [
+  "keywords": [
     "gruntplugin",
     "batman",
     "template",
